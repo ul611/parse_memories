@@ -46,7 +46,7 @@ with browser(URL_FOR_NAMES) as driver:
     letters = driver.find_elements(By.CLASS_NAME, 'list_alphabet_item')
     links_letter_by_letter = []
 
-    for letter in letters[:2]: ######### letters
+    for letter in letters:  # use letters[:2] for test mode
         link = letter.find_element(By.XPATH, './/a').get_attribute('href')
         links_letter_by_letter.append(link)
 
@@ -73,9 +73,9 @@ logging.info(f'{len(names)} unique names collected')
 
 with browser(URL_FOR_IDS) as driver:
     print('Collecting ids by year')
-    ids_by_year = collect_ids(driver, 'year', range(1874, 2000))  # range(1874, 1880) for test mode
+    ids_by_year = collect_ids(driver, 'year', range(1874, 2000))  # use range(1874, 1880) for test mode
     print('Collecting ids by name')
-    ids_by_name = collect_ids(driver, 'find', names)  # names[9:11] for test mode
+    ids_by_name = collect_ids(driver, 'find', names)  # use names[9:11] for test mode
 
     n_unique_ids = len(set(ids_by_year).union(ids_by_name))
 
